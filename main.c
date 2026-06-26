@@ -5,9 +5,20 @@
 
 
 int main() {
+
+	//GETS THE PLAYLIST NAME FROM THE USER
+	printf("Enter the name of the playlist: ");
+	char playlist_name[256];
+	char dir_path[512];
+	scanf("%s", playlist_name);
+	snprintf(dir_path, sizeof(dir_path), "./songs/%s", playlist_name);
+
+	// printf("%s",dir_path);
+
+	
 	//INITIALISING THE DIRECTORY
 	DIR *dir;
-	dir = opendir("./songs/hindi");
+	dir = opendir(dir_path);
 
 	struct dirent *entry;
 	
@@ -21,7 +32,7 @@ int main() {
 
 	char **songs = NULL;
 
-	//MAIN LOOP TO WORK WITH DIRECTORY
+	//ITERATING THROUGH THE ELEMENTS IN THE DIRECTORY
 	while((entry = readdir(dir)) != NULL){
 
 		
@@ -46,11 +57,15 @@ int main() {
 	// }
 
 
-	//PLAYS THE PLAYLIST
+	// char cmd[512];
+	// snprintf(cmd, sizeof(cmd),"mpv --no-video \"./songs/idk/%s\"",songs[3]);	
+	// printf("%s",cmd);
+
+	// PLAYS THE PLAYLIST
 	for(int i=3;i<count; i++){
 		//AGAIN AI TOLD ME and temporary code beacause bad practice to use system()
 		char cmd[512];
-		snprintf(cmd, sizeof(cmd),"mpv --no-video \"./songs/hindi/%s\"",songs[i]);	
+		snprintf(cmd, sizeof(cmd),"mpv --no-video \"./songs/%s/%s\"",playlist_name,songs[i]);	
 		
 		system(cmd);
 	}
