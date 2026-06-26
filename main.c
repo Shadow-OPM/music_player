@@ -2,6 +2,7 @@
 #include <dirent.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 
 int main() {
@@ -62,14 +63,17 @@ int main() {
 	// printf("%s",cmd);
 
 	// PLAYS THE PLAYLIST
-	for(int i=3;i<count; i++){
+	for(int i=0;i<count; i++){
 		//AGAIN AI TOLD ME and temporary code beacause bad practice to use system()
 		char cmd[512];
 		snprintf(cmd, sizeof(cmd),"mpv --no-video \"./songs/%s/%s\"",playlist_name,songs[i]);	
 		
 		system(cmd);
-	}
+	
 
+
+	printf("Waiting 5 seconds...\n");
+    sleep(5);
+	}         // Pause for 5 seconds before the next song
 }
-
 // LEARN POINTERS PROPERLY PLEASE 
